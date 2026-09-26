@@ -2,6 +2,14 @@
 
 Full-stack assessment for MoneyBeing Private Limited. Includes a responsive loan application, mock credit scoring, database-driven business rules, JWT admin access, searchable/paginated leads, rule management, Excel export, dashboard charts, OpenAPI documentation, Postman collection, Docker configuration, and automated tests.
 
+## Live application
+
+**[Open MoneyBeing Loan Assessment](https://moneybeing-loan-assessment-2.onrender.com/)**
+
+[Admin login](https://moneybeing-loan-assessment-2.onrender.com/login/) · [API documentation](https://moneybeing-loan-assessment-2.onrender.com/docs)
+
+Use the admin credentials configured for the hosted deployment. The sample credentials below are for local setup.
+
 ## Watch the project walkthrough
 
 **Netlify frontend:** [Deploy on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/diveshkumar2233/moneybeing-loan-assessment) · [Backend connection and setup](submission/netlify.md). A deployed FastAPI backend and PostgreSQL are required for a working application.
