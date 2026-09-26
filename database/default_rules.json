@@ -1,0 +1,7 @@
+[
+  {"rule_name":"Minimum age","field":"age","operator":">=","value":21,"rejection_message":"Age below minimum requirement","is_active":true},
+  {"rule_name":"Maximum age","field":"age","operator":"<=","value":60,"rejection_message":"Age above maximum requirement","is_active":true},
+  {"rule_name":"Minimum monthly income","field":"monthly_income","operator":">=","value":30000,"rejection_message":"Monthly Income below eligibility criteria","is_active":true},
+  {"rule_name":"Minimum credit score","field":"credit_score","operator":">=","value":700,"rejection_message":"Credit Score below minimum requirement","is_active":true},
+  {"rule_name":"Loan to property value","field":"loan_amount","operator":"<=","value":80,"reference_field":"property_value","rejection_message":"Loan Amount exceeds eligible limit","is_active":true}
+]

@@ -1,0 +1,283 @@
+{
+  "info": {
+    "name": "MoneyBeing Loan Assessment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run login first for admin operations. Use a fresh mobile for each new lead. Scores are MOCK."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "admin_email",
+      "value": "admin@moneybeing.local"
+    },
+    {
+      "key": "admin_password",
+      "value": "MoneyBeing@123"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "mobile",
+      "value": "9876543210"
+    },
+    {
+      "key": "lead_id",
+      "value": ""
+    },
+    {
+      "key": "rule_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Admin login (captures token)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{base_url}}/api/auth/login",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "{{admin_email}}"
+            },
+            {
+              "key": "password",
+              "value": "{{admin_password}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code < 300) pm.collectionVariables.set(\"token\", pm.response.json().access_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Current user",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/auth/me"
+      }
+    },
+    {
+      "name": "Create lead (captures lead_id)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/leads",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Asha Sharma\",\n  \"mobile\": \"{{mobile}}\",\n  \"email\": \"asha@example.com\",\n  \"date_of_birth\": \"1995-05-12\",\n  \"city\": \"Bengaluru\",\n  \"pincode\": \"560001\",\n  \"loan_type\": \"Home Loan\",\n  \"employment_type\": \"Salaried\",\n  \"monthly_income\": 75000,\n  \"loan_amount\": 4000000,\n  \"property_value\": 6000000,\n  \"consent\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code < 300) pm.collectionVariables.set(\"lead_id\", pm.response.json().lead_id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Duplicate lead \u2192 409",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/leads",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Asha Sharma\",\n  \"mobile\": \"{{mobile}}\",\n  \"email\": \"asha@example.com\",\n  \"date_of_birth\": \"1995-05-12\",\n  \"city\": \"Bengaluru\",\n  \"pincode\": \"560001\",\n  \"loan_type\": \"Home Loan\",\n  \"employment_type\": \"Salaried\",\n  \"monthly_income\": 75000,\n  \"loan_amount\": 4000000,\n  \"property_value\": 6000000,\n  \"consent\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "List leads",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/leads?page=1&page_size=10"
+      }
+    },
+    {
+      "name": "Search and filter leads",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/leads?search=Asha&loan_type=Home%20Loan&bre_status=Eligible&page=1&page_size=10"
+      }
+    },
+    {
+      "name": "Lead detail",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/leads/{{lead_id}}"
+      }
+    },
+    {
+      "name": "Export Excel",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/leads/export"
+      }
+    },
+    {
+      "name": "Dashboard summary",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/dashboard/summary"
+      }
+    },
+    {
+      "name": "List rules",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/rules"
+      }
+    },
+    {
+      "name": "Create rule (captures rule_id)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/rules",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rule_name\": \"Demo income threshold\",\n  \"field\": \"monthly_income\",\n  \"operator\": \">=\",\n  \"value\": 40000,\n  \"reference_field\": null,\n  \"rejection_message\": \"Income below configured threshold\",\n  \"is_active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code < 300) pm.collectionVariables.set(\"rule_id\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get rule",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/rules/{{rule_id}}"
+      }
+    },
+    {
+      "name": "Update rule",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/rules/{{rule_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rule_name\": \"Demo income threshold\",\n  \"field\": \"monthly_income\",\n  \"operator\": \">=\",\n  \"value\": 45000,\n  \"reference_field\": null,\n  \"rejection_message\": \"Income below configured threshold\",\n  \"is_active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Delete demo rule",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/api/rules/{{rule_id}}"
+      }
+    },
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health",
+        "auth": {
+          "type": "noauth"
+        }
+      }
+    }
+  ]
+}
