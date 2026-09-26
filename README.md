@@ -4,6 +4,8 @@ Full-stack assessment for MoneyBeing Private Limited. Includes a responsive loan
 
 ## Watch the project walkthrough
 
+**Public hosting:** [Deploy on Render](https://render.com/deploy?repo=https://github.com/diveshkumar2233/moneybeing-loan-assessment) · [Deployment instructions and free-tier limits](submission/deploy.md). This opens deployment setup; a live URL is issued only after deployment succeeds.
+
 **[▶ Watch the 4-minute 33-second demo](https://github.com/diveshkumar2233/moneybeing-loan-assessment/blob/main/submission/walkthrough.webm)**
 
 The recording explains the architecture, mock credit score integration, database-driven BRE, application workflow, duplicate validation, admin dashboard, lead management and rule changes using on-screen captions. **There is no spoken audio.**

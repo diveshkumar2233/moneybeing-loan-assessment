@@ -5,7 +5,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { api, TOKEN_KEY, errorMessage } from '@/lib/api';
 
 export default function AdminShell({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
+  const pathname = usePathname().replace(/\/$/, '');
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');

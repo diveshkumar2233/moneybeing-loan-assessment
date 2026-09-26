@@ -1,7 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,6 +18,16 @@ class Settings(BaseSettings):
     admin_email: str = "admin@moneybeing.local"
     admin_password: str = Field(min_length=12)
     mock_credit_failure: bool = False
+    static_frontend_dir: str | None = None
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def use_psycopg_driver(cls, value: str) -> str:
+        # Hosting providers supply a standard PostgreSQL URL; use installed psycopg 3.
+        for prefix in ("postgres://", "postgresql://"):
+            if value.startswith(prefix):
+                return "postgresql+psycopg://" + value[len(prefix) :]
+        return value
 
 
 @lru_cache

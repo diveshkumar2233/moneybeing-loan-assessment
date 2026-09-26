@@ -9,6 +9,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.api import auth, dashboard, leads, rules
 from app.core.config import get_settings
 from app.core.database import engine
+from app.core.frontend import mount_frontend
 from app.exceptions.custom_exceptions import RuleConfigurationError
 
 app = FastAPI(
@@ -53,3 +54,7 @@ def health():
     with engine.connect() as connection:
         connection.execute(text("SELECT 1"))
     return {"status": "ok"}
+
+
+if get_settings().static_frontend_dir:
+    mount_frontend(app, get_settings().static_frontend_dir)
