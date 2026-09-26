@@ -2,6 +2,14 @@
 
 Full-stack assessment for MoneyBeing Private Limited. Includes a responsive loan application, mock credit scoring, database-driven business rules, JWT admin access, searchable/paginated leads, rule management, Excel export, dashboard charts, OpenAPI documentation, Postman collection, Docker configuration, and automated tests.
 
+## Watch the project walkthrough
+
+**[▶ Watch the 4-minute 33-second demo](https://github.com/diveshkumar2233/moneybeing-loan-assessment/blob/main/submission/walkthrough.webm)**
+
+The recording explains the architecture, mock credit score integration, database-driven BRE, application workflow, duplicate validation, admin dashboard, lead management and rule changes using on-screen captions. **There is no spoken audio.**
+
+If the preview does not play, **[download the video](https://github.com/diveshkumar2233/moneybeing-loan-assessment/raw/refs/heads/main/submission/walkthrough.webm)** and open it in a browser or a WebM-compatible video player. The [narration outline](submission/walkthrough-script.md) is also included.
+
 ## Architecture
 
 ```text
