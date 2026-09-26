@@ -31,4 +31,4 @@ The test run emitted two dependency deprecation warnings (Passlib/Argon2 version
 
 No existing customer records were copied into the submission. All included database and Excel demo records are synthetic. Real environment configuration and PostgreSQL cluster files are excluded from Git and the source archive.
 
-GitHub publication needs the destination repository URL. The local commit and archive are ready for upload; no repository has been published yet.
+Repository destination: https://github.com/diveshkumar2233/moneybeing-loan-assessment. Source, demo dump, Postman collection and recording are included in Git; local secrets and real database files are excluded.
