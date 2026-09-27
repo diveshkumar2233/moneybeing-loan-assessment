@@ -138,6 +138,8 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 The initializer creates tables, the admin account and first-install rules. Rerunning it preserves rule edits and existing admin passwords.
 
+**Reset an existing admin password on Render:** set `ADMIN_EMAIL` to the existing admin email, set `ADMIN_PASSWORD` to your chosen private password (at least 12 characters), and temporarily set `RESET_ADMIN_PASSWORD_ON_START=true`. Deploy the latest Docker image; its initializer updates that active admin's password hash without changing leads or rules. Sign in using the configured password, then set `RESET_ADMIN_PASSWORD_ON_START=false`. Leaving it enabled reapplies the configured password on every startup. This does not reactivate disabled accounts or promote non-admin users.
+
 On Linux/macOS, use `source .venv/bin/activate` and `cp .env.example .env` instead of the PowerShell equivalents.
 
 ### 3. Start the frontend

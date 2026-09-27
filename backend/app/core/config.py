@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     cors_origins: list[str] = ["http://localhost:3000"]
     admin_email: str = "admin@moneybeing.local"
     admin_password: str = Field(min_length=12)
+    reset_admin_password_on_start: bool = False
     mock_credit_failure: bool = False
     static_frontend_dir: str | None = None
 
