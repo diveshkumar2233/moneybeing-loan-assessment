@@ -1,5 +1,7 @@
 # Verification record
 
+For the latest requirement-by-requirement review, PostgreSQL test run, production build and browser results, see [the 27 September assessment audit](assessment-checklist.md). The record below describes the earlier packaging pass.
+
 Verified on 26 September 2026.
 
 | Check | Result |

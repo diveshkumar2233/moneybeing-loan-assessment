@@ -5,7 +5,7 @@ export default defineConfig({
   workers: 1,
   timeout: 60000,
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000',
     channel: 'msedge',
     headless: true,
     trace: 'retain-on-failure',

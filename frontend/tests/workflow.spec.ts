@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const apiUrl = process.env.PLAYWRIGHT_API_URL || 'http://localhost:8000';
+
 // Run only against a dedicated assessment/test database: this creates applications.
 test('application, duplicate rejection, admin review and dynamic rule editing', async ({
   page,
@@ -27,7 +29,9 @@ test('application, duplicate rejection, admin review and dynamic rule editing', 
   await page.getByLabel('Property value').fill('6000000');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Check eligibility' }).click();
-  await expect(page.getByRole('heading', { name: 'Your eligibility assessment' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Your eligibility assessment' }),
+  ).toBeVisible();
   const result = await page.getByRole('status').innerText();
   expect(result.toLowerCase()).toContain('application received');
   const payload = {
@@ -44,7 +48,7 @@ test('application, duplicate rejection, admin review and dynamic rule editing', 
     property_value: 6000000,
     consent: true,
   };
-  const duplicate = await request.post('http://localhost:8000/api/leads', {
+  const duplicate = await request.post(`${apiUrl}/api/leads`, {
     data: payload,
   });
   expect(duplicate.status()).toBe(409);
@@ -84,7 +88,7 @@ test('application, duplicate rejection, admin review and dynamic rule editing', 
   await page.getByRole('button', { name: 'Save rule' }).click();
   const card = page.locator('section.rule-card').filter({ hasText: ruleName });
   await expect(card).toBeVisible();
-  const rejected = await request.post('http://localhost:8000/api/leads', {
+  const rejected = await request.post(`${apiUrl}/api/leads`, {
     data: { ...payload, mobile: String(Number(mobile) + 1) },
   });
   expect(rejected.status()).toBe(201);
@@ -95,7 +99,7 @@ test('application, duplicate rejection, admin review and dynamic rule editing', 
   await page.getByLabel('Threshold value').fill('1');
   await page.getByRole('button', { name: 'Save rule' }).click();
   await expect(card.locator('.rule-expression')).toContainText('1.00');
-  const updated = await request.post('http://localhost:8000/api/leads', {
+  const updated = await request.post(`${apiUrl}/api/leads`, {
     data: { ...payload, mobile: String(Number(mobile) + 2) },
   });
   expect(updated.status()).toBe(201);
@@ -105,8 +109,35 @@ test('application, duplicate rejection, admin review and dynamic rule editing', 
   page.once('dialog', (dialog) => dialog.accept());
   await card.getByRole('button', { name: 'Delete' }).click();
   await expect(card).toHaveCount(0);
+  await page
+    .getByRole('link', { name: 'Lead management', exact: true })
+    .click();
+  await page
+    .getByRole('textbox', { name: 'Search name or mobile' })
+    .fill(mobile);
+  const applicationRow = page.getByRole('row').filter({
+    has: page.getByRole('cell', { name: mobile, exact: true }),
+  });
+  await expect(applicationRow).toBeVisible();
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await applicationRow
+    .getByRole('button', { name: /Delete application/ })
+    .click();
+  await expect(applicationRow).toBeVisible();
+  page.once('dialog', (dialog) => dialog.accept());
+  await applicationRow
+    .getByRole('button', { name: /Delete application/ })
+    .click();
+  await expect(
+    page.getByRole('status').filter({ hasText: /Application #\d+ deleted\./ }),
+  ).toBeVisible();
+  await expect(page.locator('.table-wrap')).toHaveAttribute(
+    'aria-busy',
+    'false',
+  );
+  await expect(applicationRow).toHaveCount(0);
   await page.getByRole('button', { name: 'Sign out' }).click();
-  await expect(page).toHaveURL(/\/login$/);
+  await expect(page).toHaveURL(/\/login\/?$/);
   expect(errors).toEqual([]);
 });
 

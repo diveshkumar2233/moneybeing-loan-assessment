@@ -9,6 +9,7 @@ This package uses **synthetic demonstration data only**. No existing customer re
 - `submission/walkthrough.webm`: 4-minute 33-second captioned browser recording demonstrating the real application against a separate demo database. This recording has on-screen explanations and no spoken audio. Open it in a browser or a WebM-compatible video player.
 - `submission/walkthrough-script.md`: explanation outline for a personally narrated presentation.
 - Root `README.md`: full setup and architecture documentation.
+- `submission/assessment-checklist.md`: requirement-by-requirement audit and current verification limits.
 
 ## Restore the demo database
 
