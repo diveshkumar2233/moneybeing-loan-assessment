@@ -4,11 +4,11 @@ A full-stack assessment project for **MoneyBeing Private Limited**, built with *
 
 ## Live demo
 
-### [Open the Live Project](https://moneybeing-loan-assessment-2.onrender.com/)
+### [Open the Live Project](https://moneybeing-loan-assessment-3.onrender.com/)
 
-**Live URL:** https://moneybeing-loan-assessment-2.onrender.com/
+**Live URL:** https://moneybeing-loan-assessment-3.onrender.com/
 
-[Admin Login](https://moneybeing-loan-assessment-2.onrender.com/login/) · [API Documentation](https://moneybeing-loan-assessment-2.onrender.com/docs) · [GitHub Repository](https://github.com/diveshkumar2233/moneybeing-loan-assessment)
+[Admin Login](https://moneybeing-loan-assessment-3.onrender.com/login/) · [API Documentation](https://moneybeing-loan-assessment-3.onrender.com/docs) · [GitHub Repository](https://github.com/diveshkumar2233/moneybeing-loan-assessment)
 
 Use the admin credentials shared privately for the hosted application. The sample credentials below are for local testing.
 

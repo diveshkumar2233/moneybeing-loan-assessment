@@ -44,3 +44,7 @@ Excel export, dashboard chart code, Swagger/Postman, role checks, automated test
 The live Render site's home page, health endpoint and Swagger returned HTTP 200. Its OpenAPI document did **not** include the newly added lead DELETE endpoint at the time of this audit. Local and GitHub code include it and deletion passed browser/API tests; the live service needs the latest deployment for that extra feature. This audit did not perform writes against the live service.
 
 All eight mandatory assessment modules and five submission artifacts were found and checked. The above Docker and live-version limits should not be represented as verified successes.
+
+## Live deployment update
+
+The live URL is now https://moneybeing-loan-assessment-3.onrender.com/. Home, health, Swagger and OpenAPI endpoints returned HTTP 200; health reported `ok`. The new deployment exposes `DELETE /api/leads/{lead_id}` in OpenAPI, resolving the earlier missing-endpoint observation. No live customer records were modified during this check.
