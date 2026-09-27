@@ -48,3 +48,7 @@ All eight mandatory assessment modules and five submission artifacts were found 
 ## Live deployment update
 
 The live URL is now https://moneybeing-loan-assessment-3.onrender.com/. Home, health, Swagger and OpenAPI endpoints returned HTTP 200; health reported `ok`. The new deployment exposes `DELETE /api/leads/{lead_id}` in OpenAPI, resolving the earlier missing-endpoint observation. No live customer records were modified during this check.
+
+## Recording replacement
+
+The earlier captioned WebM referenced in this historical audit has been replaced by `submission/walkthrough.mp4`, the author-supplied 4:23 recording with enhanced audio. See `submission/README.md` for the current file and technical audio verification. The previous video audit does not establish the spoken coverage of the replacement.

@@ -34,3 +34,7 @@ The test run emitted two dependency deprecation warnings (Passlib/Argon2 version
 No existing customer records were copied into the submission. All included database and Excel demo records are synthetic. Real environment configuration and PostgreSQL cluster files are excluded from Git and the source archive.
 
 Repository destination: https://github.com/diveshkumar2233/moneybeing-loan-assessment. Source, demo dump, Postman collection and recording are included in Git; local secrets and real database files are excluded.
+
+## Recording replacement
+
+The earlier captioned WebM referenced in this historical audit has been replaced by `submission/walkthrough.mp4`, the author-supplied 4:23 recording with enhanced audio. See `submission/README.md` for the current file and technical audio verification. The previous video audit does not establish the spoken coverage of the replacement.
