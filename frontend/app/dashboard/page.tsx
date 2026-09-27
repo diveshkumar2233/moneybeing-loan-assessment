@@ -22,12 +22,12 @@ function DashboardContent() {
   async function load() {
     setError('');
     try {
-      const [s, l] = await Promise.all([
+      const [summaryData, recentLeads] = await Promise.all([
         api<Summary>('/api/dashboard/summary'),
         api<LeadPage>('/api/leads?page_size=5'),
       ]);
-      setSummary(s);
-      setLeads(l);
+      setSummary(summaryData);
+      setLeads(recentLeads);
     } catch (e) {
       setError(errorMessage(e));
     }

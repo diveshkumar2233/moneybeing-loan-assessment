@@ -1,3 +1,15 @@
+export type LeadCreated = {
+  status: 'success';
+  lead_id: number;
+  credit_score: number | null;
+  bre_status: 'Eligible' | 'Not Eligible';
+};
+
+export type ApplicationResult = LeadCreated & {
+  reasons: string[];
+  warning: string | null;
+};
+
 export type Lead = {
   id: number;
   full_name: string;

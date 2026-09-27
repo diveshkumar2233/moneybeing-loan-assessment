@@ -74,10 +74,14 @@ SQLAlchemy -> PostgreSQL: users, leads, rules
 
 - `backend/app/api/`: REST endpoints and admin authorization.
 - `backend/app/schemas/` and `models/`: validation and database structure.
-- `backend/app/services/`: mock credit scoring and dynamic rule evaluation.
+- `backend/app/services/`: application processing, mock credit scoring, dynamic rule evaluation and Excel export.
 - `frontend/app/`: customer form, login, dashboard, leads and rules screens.
+- `frontend/components/`: reusable UI, including the application form and eligibility result.
+- `frontend/lib/`: API requests, application submission and shared TypeScript types.
 - `database/`: initialization, default rules and SQL dumps.
 - `postman/` and `submission/`: API collection, walkthrough and supporting files.
+
+To follow a submission in the code, start with `frontend/app/page.tsx`. It passes the form to `frontend/lib/applications.ts`, which calls `POST /api/leads`. The endpoint delegates to `backend/app/services/lead_service.py` to check duplicates, fetch the score, evaluate database rules and save the lead. The endpoint then returns the assessment response.
 
 ## Run locally
 
