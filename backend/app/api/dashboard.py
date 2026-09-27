@@ -21,6 +21,8 @@ class Summary(BaseModel):
 
 @router.get("/summary", response_model=Summary)
 def summary(db: Session = Depends(get_db)):
+    # Calculate all four cards in one query, without loading individual leads.
+    # AVG ignores NULL scores from failed credit-service requests.
     total, eligible, rejected, average = db.execute(
         select(
             func.count(Lead.id),
@@ -29,6 +31,7 @@ def summary(db: Session = Depends(get_db)):
             func.avg(Lead.credit_score),
         )
     ).one()
+    # SUM is NULL for an empty table; display zero counts in that case.
     return Summary(
         total_leads=total,
         eligible_leads=eligible or 0,

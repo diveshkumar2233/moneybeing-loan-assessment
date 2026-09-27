@@ -10,6 +10,7 @@ from app.models.user import User
 from app.schemas.auth import Token, UserRead
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
+# Verify a hash even for unknown emails to reduce account-lookup timing differences.
 dummy_hash = hash_password("dummy-password-for-timing")
 
 

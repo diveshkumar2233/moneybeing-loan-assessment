@@ -13,5 +13,6 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 
 def get_db():
+    # Give each request its own session and close it when the request finishes.
     with SessionLocal() as session:
         yield session

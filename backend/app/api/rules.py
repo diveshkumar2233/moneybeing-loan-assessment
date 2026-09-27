@@ -36,6 +36,7 @@ def get_rule(rule_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{rule_id}", response_model=RuleRead)
 def update_rule(rule_id: int, data: RuleWrite, db: Session = Depends(get_db)):
+    # Commit the new criteria for future evaluations; saved lead decisions stay intact.
     rule = get_rule(rule_id, db)
     for key, value in data.model_dump().items():
         setattr(rule, key, value)

@@ -32,6 +32,7 @@ def main():
                 )
             )
         if seed_rules:
+            # Validate seed data with the same schema used by the admin rule API.
             for data in json.loads(
                 Path(__file__).with_name("default_rules.json").read_text()
             ):

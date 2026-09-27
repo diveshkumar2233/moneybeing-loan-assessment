@@ -10,6 +10,8 @@ from sqlalchemy.orm import Session
 from app.exceptions.custom_exceptions import RuleConfigurationError
 from app.models.rule import Rule
 
+# These are supported operations, not eligibility thresholds.
+# Each rule's operator and threshold come from the database.
 OPERATORS = {
     ">=": operator.ge,
     "<=": operator.le,
@@ -25,6 +27,7 @@ def evaluate_lead(db: Session, application, credit_score: int | None):
     today = date.today()
     dob = application.date_of_birth
     values = {field: getattr(application, field, None) for field in FIELDS}
+    # Subtract one year if the customer's birthday has not occurred this year.
     values["age"] = (
         today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
     )
@@ -44,6 +47,8 @@ def evaluate_lead(db: Session, application, credit_score: int | None):
         reference = values.get(rule.reference_field) if rule.reference_field else None
         target = Decimal(rule.value)
         if rule.reference_field:
+            # A reference field makes the stored value a percentage of that field.
+            # Decimal keeps monetary comparisons free of float rounding errors.
             target = (
                 Decimal(reference) * target / Decimal(100)
                 if reference is not None
@@ -56,6 +61,8 @@ def evaluate_lead(db: Session, application, credit_score: int | None):
         )
         if not passed:
             reasons.append(rule.rejection_message)
+        # Save the evaluated rule values with the lead so later rule edits do not
+        # change the explanation of an earlier decision.
         results.append(
             {
                 "rule_id": rule.id,
@@ -70,6 +77,7 @@ def evaluate_lead(db: Session, application, credit_score: int | None):
             }
         )
     if credit_score is None:
+        # Missing provider data requires review, even if no active rule uses it.
         reasons.append(
             "Credit score unavailable; manual review required. Please contact support."
         )

@@ -9,6 +9,7 @@ password_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 
 def hash_password(password: str) -> str:
+    # Store a salted Argon2 hash, never the original password.
     return password_context.hash(password)
 
 
@@ -17,6 +18,7 @@ def verify_password(password: str, hashed: str) -> bool:
 
 
 def create_access_token(user_id: int) -> str:
+    # The signed token identifies the user (sub) and has a fixed expiry (exp).
     settings = get_settings()
     now = datetime.now(timezone.utc)
     return jwt.encode(

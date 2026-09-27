@@ -36,9 +36,11 @@ def get_credit_score(application: LeadCreate) -> tuple[int | None, str | None]:
 
 
 def save_application(db: Session, application: LeadCreate) -> Lead:
+    """Check duplicates, assess the application and persist its decision."""
     if mobile_exists(db, application.mobile):
         raise DuplicateLeadError()
 
+    # A provider failure returns None; the BRE records a manual-review reason.
     score, score_error = get_credit_score(application)
     status, rejection_reasons, rule_results = evaluate_lead(db, application, score)
     lead = Lead(

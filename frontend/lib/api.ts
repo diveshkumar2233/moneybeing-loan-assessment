@@ -8,9 +8,11 @@ export async function apiResponse(
   authenticated = true,
 ): Promise<Response> {
   const headers = new Headers(options.headers);
+  // Login uses URL-encoded form data; application and rule requests use JSON.
   if (options.body && !(options.body instanceof URLSearchParams))
     headers.set('Content-Type', 'application/json');
   if (authenticated && typeof window !== 'undefined') {
+    // Protected requests carry the token saved by the login screen.
     const token = sessionStorage.getItem(TOKEN_KEY);
     if (token) headers.set('Authorization', `Bearer ${token}`);
   }
@@ -33,6 +35,7 @@ export async function apiResponse(
       authenticated &&
       typeof window !== 'undefined'
     ) {
+      // An expired or invalid login must be replaced before retrying admin actions.
       sessionStorage.removeItem(TOKEN_KEY);
       window.location.assign('/login');
     }

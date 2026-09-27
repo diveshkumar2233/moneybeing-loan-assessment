@@ -49,6 +49,7 @@ function RulesContent() {
     setNotice('');
     try {
       await api(`/api/rules${editing === null ? '' : `/${editing}`}`, {
+        // The same form creates a rule or replaces the selected rule's settings.
         method: editing === null ? 'POST' : 'PUT',
         body: JSON.stringify(form),
       });

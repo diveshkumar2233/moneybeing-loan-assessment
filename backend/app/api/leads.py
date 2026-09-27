@@ -30,6 +30,7 @@ def build_lead_filters(
 ) -> list[ColumnElement[bool]]:
     clauses = []
     if search:
+        # Treat SQL wildcard characters as literal user input when searching.
         escaped = search.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
         clauses.append(
             or_(
@@ -75,6 +76,7 @@ def list_leads(
     clauses = build_lead_filters(search, loan_type, bre_status)
     total = db.scalar(select(func.count()).select_from(Lead).where(*clauses))
     items = db.scalars(
+        # ID breaks timestamp ties, keeping pagination order consistent.
         select(Lead)
         .where(*clauses)
         .order_by(Lead.created_at.desc(), Lead.id.desc())
@@ -91,6 +93,7 @@ def export_leads(
     bre_status: BREStatus | None = None,
     db: Session = Depends(get_db),
 ):
+    # Export every matching lead, using the same filters as the paginated table.
     query = (
         select(Lead)
         .where(*build_lead_filters(search, loan_type, bre_status))

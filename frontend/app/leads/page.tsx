@@ -27,6 +27,7 @@ function LeadsContent() {
     ...(loanType && { loan_type: loanType }),
     ...(status && { bre_status: status }),
   }).toString();
+  // Wait briefly while typing, and cancel stale requests when filters change.
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -53,6 +54,7 @@ function LeadsContent() {
     setError('');
     try {
       const response = await apiResponse(`/api/leads/export?${query}`);
+      // Turn the authenticated response into a browser download, then release it.
       const url = URL.createObjectURL(await response.blob());
       const a = document.createElement('a');
       a.href = url;

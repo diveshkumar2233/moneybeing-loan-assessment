@@ -14,12 +14,15 @@ def current_user(
     token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
 ) -> User:
     try:
+        # Verify the signature and expiry before trusting the user ID.
         payload = jwt.decode(
             token,
             get_settings().secret_key,
             algorithms=["HS256"],
             options={"require": ["sub", "exp", "iat"]},
         )
+        # Read current account permissions so disabling an account takes effect
+        # even when its previously issued token has not expired.
         user = db.get(User, int(payload["sub"]))
     except (jwt.InvalidTokenError, ValueError, TypeError):
         user = None
