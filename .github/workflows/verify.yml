@@ -29,6 +29,7 @@ jobs:
         working-directory: frontend
     env:
       NEXT_STATIC_EXPORT: 'true'
+      NEXT_DIST_DIR: 'out'
       NEXT_PUBLIC_API_URL: ''
       NEXT_TELEMETRY_DISABLED: '1'
     steps:

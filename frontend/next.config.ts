@@ -3,9 +3,10 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 
 export default function config(phase: string): NextConfig {
   const staticExport = process.env.NEXT_STATIC_EXPORT === 'true';
-  // Separate caches prevent an export/build from replacing a running dev server's assets.
+  // In export mode distDir names the published output, which Docker copies from out.
+  // Keep the dev cache separate so production builds cannot break local dev assets.
   const defaultDirectory = staticExport
-    ? '.next-export'
+    ? 'out'
     : phase === PHASE_DEVELOPMENT_SERVER
       ? '.next-dev'
       : '.next';

@@ -1,6 +1,7 @@
 **/node_modules
 **/.next
 **/.next-*
+frontend/out/
 submission/
 **/.venv
 **/__pycache__

@@ -5,9 +5,11 @@ COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend/ ./
 ENV NEXT_STATIC_EXPORT=true
+ENV NEXT_DIST_DIR=out
 ENV NEXT_PUBLIC_API_URL=""
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
+RUN test -f out/index.html && test -f out/login/index.html && test -f out/dashboard/index.html && test -f out/leads/index.html && test -f out/rules/index.html
 
 FROM python:3.12-slim
 WORKDIR /workspace
