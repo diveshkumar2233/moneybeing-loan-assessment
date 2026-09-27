@@ -44,7 +44,7 @@ export default function Login() {
         <p className="muted">
           Sign in to manage applications and eligibility rules.
         </p>
-        <form onSubmit={submit}>
+        <form method="post" onSubmit={submit}>
           <label>
             Email address
             <input type="email" name="email" autoComplete="username" required />

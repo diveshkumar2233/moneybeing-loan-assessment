@@ -155,6 +155,8 @@ On Linux/macOS, use `cp .env.local.example .env.local`. The frontend environment
 
 Open **http://localhost:3000**. Local API documentation is at **http://localhost:8000/docs**.
 
+Use `npm run dev` for local development. Development, production and static-export builds use separate cache directories (`.next-dev`, `.next` and `.next-export`). If using `npm start`, stop that server before rebuilding its production output, then restart it. A running server with overwritten assets can leave admin pages stuck on "Checking your session"; restart the frontend and hard-refresh the browser in that case.
+
 | Local admin email | Local admin password |
 |---|---|
 | `admin@moneybeing.local` | `MoneyBeing@123` |
