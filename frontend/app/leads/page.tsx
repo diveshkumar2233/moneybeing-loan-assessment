@@ -15,6 +15,9 @@ function LeadsContent() {
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
   const [selected, setSelected] = useState<Lead | null>(null);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [refresh, setRefresh] = useState(0);
+  const [notice, setNotice] = useState('');
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('id');
     if (id && /^\d+$/.test(id))
@@ -48,7 +51,32 @@ function LeadsContent() {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [page, query]);
+  }, [page, query, refresh]);
+  async function deleteApplication(lead: Lead) {
+    if (deletingId !== null) return;
+    if (
+      !window.confirm(
+        `Permanently delete application #${lead.id} for ${lead.full_name}? This cannot be undone.`,
+      )
+    )
+      return;
+
+    setDeletingId(lead.id);
+    setError('');
+    setNotice('');
+    try {
+      await api(`/api/leads/${lead.id}`, { method: 'DELETE' });
+      setSelected((current) => (current?.id === lead.id ? null : current));
+      setNotice(`Application #${lead.id} deleted.`);
+      // Reload from the first page so deleting the last row cannot leave an empty page.
+      setPage(1);
+      setRefresh((value) => value + 1);
+    } catch (error) {
+      setError(errorMessage(error));
+    } finally {
+      setDeletingId(null);
+    }
+  }
   async function download() {
     setExporting(true);
     setError('');
@@ -84,6 +112,7 @@ function LeadsContent() {
           {error}
         </div>
       )}
+      {notice && <p role="status">{notice}</p>}
       <section className="card">
         <div className="toolbar">
           <input
@@ -133,7 +162,7 @@ function LeadsContent() {
                   'Credit score',
                   'BRE status',
                   'Created date',
-                  '',
+                  'Actions',
                 ].map((title, i) => (
                   <th key={i} scope="col">
                     {title}
@@ -162,6 +191,14 @@ function LeadsContent() {
                         onClick={() => setSelected(lead)}
                       >
                         View
+                      </button>
+                      <button
+                        className="secondary ml-2 text-red-700"
+                        disabled={deletingId !== null}
+                        aria-label={`Delete application ${lead.id}`}
+                        onClick={() => deleteApplication(lead)}
+                      >
+                        {deletingId === lead.id ? 'Deleting...' : 'Delete'}
                       </button>
                     </td>
                   </tr>

@@ -26,7 +26,7 @@ The recording covers the architecture, credit score mock, business rules and cus
 | Credit scoring | Mock score generation, display, database storage and failure handling |
 | Business Rule Engine | Database-driven rules, eligibility result and specific rejection reasons |
 | Admin panel | JWT login; total, eligible and rejected leads; average credit score |
-| Lead management | All required columns, name/mobile search, loan/status filters and pagination |
+| Lead management | All required columns, name/mobile search, loan/status filters, pagination and admin-only deletion |
 | Rule management | Add, edit, delete or deactivate rules; changes apply to future applications |
 | REST API | Application submission, lead retrieval, authentication, rules and dashboard endpoints |
 | Duplicate prevention | Repeated mobile numbers return HTTP 409: `Lead already exists` |
@@ -41,6 +41,8 @@ Extras include **Excel export, dashboard charts, Swagger, Postman, Docker config
 4. Sign in as an admin to review dashboard totals and search/filter leads.
 5. Open a lead to view its details, or select **Export Excel**.
 6. Edit a business rule and submit a new application with a different mobile number to verify the updated criteria.
+
+Admins can select **Delete** beside an application in Lead Management. A confirmation appears before permanent deletion. Deleted applications no longer contribute to dashboard totals or exports; their mobile numbers can be used for new applications.
 
 ### Credit score disclosure
 
@@ -201,6 +203,7 @@ Rejection reasons appear in the UI and admin lead details. The create endpoint a
 | POST | `/api/leads` | Submit application |
 | GET | `/api/leads` | Search, filter and paginate leads |
 | GET | `/api/leads/{id}` | Lead details |
+| DELETE | `/api/leads/{id}` | Permanently delete an application (admin only) |
 | GET | `/api/leads/export` | Excel export |
 | GET | `/api/dashboard/summary` | Dashboard metrics |
 | GET / POST | `/api/rules` | List or create rules |

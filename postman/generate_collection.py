@@ -130,6 +130,7 @@ collection = {
             "Update rule", "PUT", "/api/rules/{{rule_id}}", {**rule, "value": 45000}
         ),
         request("Delete demo rule", "DELETE", "/api/rules/{{rule_id}}"),
+        request("Permanently delete demo lead", "DELETE", "/api/leads/{{lead_id}}"),
         request("Health", "GET", "/health", public=True),
     ],
 }

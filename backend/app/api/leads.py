@@ -116,3 +116,12 @@ def get_lead(lead_id: int, db: Session = Depends(get_db)):
     if lead is None:
         raise HTTPException(404, "Lead not found")
     return lead
+
+
+@router.delete("/{lead_id}", status_code=204, dependencies=[Depends(require_admin)])
+def delete_lead(lead_id: int, db: Session = Depends(get_db)):
+    """Permanently remove an application and its stored assessment."""
+    lead = get_lead(lead_id, db)
+    db.delete(lead)
+    db.commit()
+    return Response(status_code=204)

@@ -269,6 +269,14 @@
       }
     },
     {
+      "name": "Permanently delete demo lead",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/api/leads/{{lead_id}}"
+      }
+    },
+    {
       "name": "Health",
       "request": {
         "method": "GET",
