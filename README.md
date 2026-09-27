@@ -161,7 +161,7 @@ Use `npm run dev` for local development; its cache is `.next-dev`. Production bu
 
 | Local admin email | Local admin password |
 |---|---|
-| `admin@moneybeing.local` | `MoneyBeing@123` |
+| `admin@moneybeing.local` | `jXGWff5pi2AuAOx2E9wkSKrxoHZrViL-` |
 
 These are development credentials. Do not reuse them for a public deployment or commit your `.env` files.
 
