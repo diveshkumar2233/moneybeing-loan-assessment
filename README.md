@@ -16,7 +16,7 @@ Use the admin credentials shared privately for the hosted application. The sampl
 
 [Watch the 4:23-minute recording](submission/walkthrough.mp4) · [Download video](https://github.com/diveshkumar2233/moneybeing-loan-assessment/raw/refs/heads/main/submission/walkthrough.mp4)
 
-The recording shows the application form, mock credit score result, admin dashboard, lead management and business rules. It includes the author's original narration, with background-noise reduction and balanced speech volume.
+The recording shows the application form, mock credit score result, admin dashboard, lead management and business rules. It includes the author's original narration, with a modest volume increase and low-rumble reduction. Strong noise suppression is avoided to preserve quiet speech.
 
 ## Features
 
