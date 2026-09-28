@@ -14,9 +14,9 @@ Use the admin credentials shared privately for the hosted application. The sampl
 
 ## Project walkthrough
 
-[Watch the 4:23-minute recording](submission/walkthrough.mp4) · [Download video](https://github.com/diveshkumar2233/moneybeing-loan-assessment/raw/refs/heads/main/submission/walkthrough.mp4)
+[Watch the 4:21-minute recording](submission/walkthrough.mp4) · [Download video](https://github.com/diveshkumar2233/moneybeing-loan-assessment/raw/refs/heads/main/submission/walkthrough.mp4)
 
-The recording shows the application form, mock credit score result, admin dashboard, lead management and business rules. It includes the author's original narration, with a modest volume increase and low-rumble reduction. Strong noise suppression is avoided to preserve quiet speech.
+The recording shows the application form, mock credit score result, admin dashboard, lead management and business rules.
 
 ## Features
 
@@ -245,7 +245,7 @@ Browser tests are in `frontend/tests/`. They require the API and frontend runnin
 | Database restore instructions | [Restore guide](submission/README.md#restore-the-demo-database) |
 | Setup instructions | This README |
 | Postman collection | [Import JSON](postman/MoneyBeing.postman_collection.json) |
-| Screen recording | [4:23-minute walkthrough](submission/walkthrough.mp4) |
+| Screen recording | [4:21-minute walkthrough](submission/walkthrough.mp4) |
 
 The SQL dump contains synthetic demonstration records, not real customer data. Restore it into a new database as an alternative to fresh initialization.
 
