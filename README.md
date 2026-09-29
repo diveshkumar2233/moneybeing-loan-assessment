@@ -159,9 +159,9 @@ Open **http://localhost:3000**. Local API documentation is at **http://localhost
 
 Use `npm run dev` for local development; its cache is `.next-dev`. Production builds use `.next`, and static exports publish to `out`, which the Render Dockerfile copies into the application image. If using `npm start`, stop that server before rebuilding its production output, then restart it. A running server with overwritten assets can leave admin pages stuck on "Checking your session"; restart the frontend and hard-refresh the browser in that case.
 
-| Local admin email | Local admin password | Render Link admin Password |
-|---|---|---|
-| `admin@moneybeing.local` | `MoneyBeing@123` | `jXGWff5pi2AuAOx2E9wkSKrxoHZrViL-`
+| Local admin email | Local admin password |
+|---|---|
+| `admin@moneybeing.local` | `MoneyBeing@123` |
 
 These are development credentials. Do not reuse them for a public deployment or commit your `.env` files.
 
@@ -248,6 +248,9 @@ Browser tests are in `frontend/tests/`. They require the API and frontend runnin
 | Setup instructions | This README |
 | Postman collection | [Import JSON](postman/MoneyBeing.postman_collection.json) |
 | Screen recording | [4:21-minute walkthrough](submission/walkthrough.mp4) |
+| Recording explanation outline | [Architecture, BRE, credit score and workflow](submission/walkthrough-script.md) |
+
+The assessment asks the 3–5 minute screen recording to explain the project architecture, BRE implementation, credit score integration and overall workflow. This project uses a disclosed mock credit score service.
 
 The SQL dump contains synthetic demonstration records, not real customer data. Restore it into a new database as an alternative to fresh initialization.
 
