@@ -165,6 +165,8 @@ Use `npm run dev` for local development; its cache is `.next-dev`. Production bu
 
 These are development credentials. Do not reuse them for a public deployment or commit your `.env` files.
 
+For Render, set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in the service's Environment settings. Keep the hosted password private and out of this public repository. Choose a private password of at least 12 characters.
+
 ## API examples
 
 ### Create an application
