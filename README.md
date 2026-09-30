@@ -159,7 +159,7 @@ Open **http://localhost:3000**. Local API documentation is at **http://localhost
 
 Use `npm run dev` for local development; its cache is `.next-dev`. Production builds use `.next`, and static exports publish to `out`, which the Render Dockerfile copies into the application image. If using `npm start`, stop that server before rebuilding its production output, then restart it. A running server with overwritten assets can leave admin pages stuck on "Checking your session"; restart the frontend and hard-refresh the browser in that case.
 
-| Local admin email | Local admin password |  Render password admin panel |
+| Local admin email | Local admin password |  Render password password |
 |---|---|---|
 | `admin@moneybeing.local` | `MoneyBeing@123` | `jXGWff5pi2AuAOx2E9wkSKrxoHZrViL-`|
 
